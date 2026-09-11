@@ -106,7 +106,7 @@ public class Main {
         Blockchain blockchain = new Blockchain(first_Geter, first_bal);
 
         boolean start = true;
-        System.out.println("Введите:\n1) Чтобы произвести транзакцию\n 2) Чтобы завершить имитацию\n");
+        System.out.println("Введите:\n1) Чтобы произвести транзакцию\n2) Вывести цепочку транзакций\n3) Вывести цепочку блоков \n4) Чтобы завершить имитацию\n");
         while (start){
             String number = sc.nextLine().trim();
             try {
@@ -121,7 +121,7 @@ public class Main {
                         String Balance = sc.nextLine().trim();
                         int ba = Integer.parseInt(Balance);
                         continue;
-                    case 2:
+                    case 4:
                         System.out.print("Завершено");
                         start=false;
                         break;
