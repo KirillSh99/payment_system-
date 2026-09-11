@@ -1,10 +1,22 @@
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 import static java.lang.System.in;
 
+class Blockchain {
+    private List<Block> chain = new ArrayList<>();
+    private List<Transaction> pendingPool = new ArrayList<>();
+
+    public Blockchain(String name, int balance) {
+        List<Transaction> genesisTx = new ArrayList<>();
+        genesisTx.add(new Transaction("System", name, balance));
+        Block genesis = new Block(0, genesisTx, "0");
+        chain.add(genesis);
+    }
+}
 
 class Transaction{
     private String Sender;
@@ -50,7 +62,6 @@ class Genesis_Block{
     private int Index = 0;
     String Hash_past = "0";
     Scanner scanner = new Scanner(System.in);
-
     Transaction first_transaction = new Transaction("System", "Вася", 100);
 }
 
@@ -60,7 +71,7 @@ class Block{
     String Hash_past;
     String Hash_now;
 
-    Block(int Index, ArrayList<Transaction> transaction_list, String Hash_past){
+    Block(int Index, List<Transaction> transaction_list, String Hash_past){
         this.Index=Index;
         this.transaction_list=new ArrayList<Transaction>(transaction_list);
         this.Hash_past=Hash_past;
@@ -85,22 +96,23 @@ class Block{
 
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Имя получателя:");
+        String first_Geter = sc.nextLine().trim();
+        System.out.print("Сумма:");
+        String first_balance = sc.nextLine().trim();
+        int first_bal = Integer.parseInt(first_balance);
+
+        Blockchain blockchain = new Blockchain(first_Geter, first_bal);
+
         boolean start = true;
-        System.out.println("Введите:\n 1) Чтобы добавить сумму от системы\n 2) Чтобы произвести транзакцию\n 3) Чтобы завершить имитацию\n");
+        System.out.println("Введите:\n1) Чтобы произвести транзакцию\n 2) Чтобы завершить имитацию\n");
         while (start){
-            Scanner sc = new Scanner(System.in);
             String number = sc.nextLine().trim();
             try {
                 int num = Integer.parseInt(number);
                 switch (num){
                     case 1:
-                        System.out.print("Введите имя и сумму: \n Имя:");
-                        String name = sc.nextLine().trim();
-                        System.out.print("Сумма:");
-                        String Balance_first = sc.nextLine().trim();
-                        int bal_f = Integer.parseInt(Balance_first);
-                        continue;
-                    case 2:
                         System.out.print("Введите отправителя, получателя и сумму: \n Имя отправителя:");
                         String name_Sender = sc.nextLine().trim();
                         System.out.print("Имя получателя:");
@@ -109,7 +121,7 @@ public class Main {
                         String Balance = sc.nextLine().trim();
                         int ba = Integer.parseInt(Balance);
                         continue;
-                    case 3:
+                    case 2:
                         System.out.print("Завершено");
                         start=false;
                         break;
