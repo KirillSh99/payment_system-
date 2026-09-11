@@ -14,14 +14,13 @@ class Transaction{
     private int Index = 0;
     private int Index_sender;
     private int Index_giver;
-    private float belence;
-
+    private float balance;
 }
 
 class Block{
     private int Index = 0;
     public ArrayList<Transaction> trans_list;
-    String hash_past;
+    String Hash_past;
     String Hash_now;
 
 
